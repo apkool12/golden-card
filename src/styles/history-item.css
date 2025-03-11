@@ -1,0 +1,80 @@
+@font-face {
+  font-family: GmarketSansTTFLight;
+  src: url(../Fonts/GmarketSansTTFLight.ttf);
+}
+
+
+.history-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: #f5f7fa;
+  position: relative;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s;
+}
+
+.history-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.08);
+}
+
+.history-item:last-child {
+  margin-bottom: 0;
+}
+
+.history-item.reward {
+  border-left: 5px solid #a1c4fd;
+}
+
+.history-item.penalty {
+  border-left: 5px solid #ff9a9e;
+}
+
+.history-item.hint {
+  border-left: 5px solid #81fbb8;
+}
+
+.history-item.event {
+  border-left: 5px solid #d4a5ff;
+}
+
+.history-item.special {
+  border-left: 5px solid #ffeaa7;
+}
+
+.history-item.ur {
+  box-shadow: 0 3px 10px rgba(255, 215, 0, 0.2);
+}
+
+.history-item.ssr {
+  box-shadow: 0 3px 10px rgba(253, 121, 168, 0.2);
+}
+
+.history-rarity {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 4px 8px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  margin-right: 12px;
+  min-width: 35px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.history-content {
+  font-family: GmarketSansTTFLight;
+  flex: 1;
+  margin-right: 10px;
+  font-size: 0.95rem;
+}
+
+.history-effect {
+  font-size: 0.85rem;
+  padding: 4px 8px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+  font-weight: 600;
+}

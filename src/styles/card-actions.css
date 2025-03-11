@@ -1,0 +1,42 @@
+.card-actions {
+  display: flex;
+  gap: 18px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.reopen-btn, .new-card-btn {
+  padding: 14px 18px;
+  border: none;
+  border-radius: 30px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  flex: 1;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.reopen-btn {
+  background: linear-gradient(145deg, #74b9ff, #0984e3);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.new-card-btn {
+  background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.reopen-btn:hover, .new-card-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.reopen-btn:active, .new-card-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

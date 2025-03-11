@@ -1,0 +1,30 @@
+.open-card-btn {
+  background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+  border: none;
+  border-radius: 12px;
+  padding: 16px 30px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  box-shadow: 0 8px 15px rgba(108, 92, 231, 0.3);
+}
+
+.open-card-btn:hover:not(.disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 20px rgba(108, 92, 231, 0.4);
+}
+
+.open-card-btn.disabled {
+  background: linear-gradient(145deg, #d1d1d1, #b8b8b8);
+  cursor: not-allowed;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .open-card-btn {
+    font-size: 1rem;
+    padding: 12px 25px;
+  }
+}

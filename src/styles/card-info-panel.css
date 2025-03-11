@@ -1,0 +1,46 @@
+.card-info-panel {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border-radius: 20px;
+  padding: 25px;
+  width: 100%;
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card-cost {
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+  color: #6c5ce7;
+  font-weight: 700;
+  padding: 10px 24px;
+  background: rgba(108, 92, 231, 0.1);
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(108, 92, 231, 0.1);
+}
+
+.rarity-list {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.rarity-item {
+  margin: 10px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 15px;
+  background: #ffffff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s;
+}
+
+.rarity-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,22 @@
+.history-section {
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  width: 100%;
+  margin: 20px 0;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.card-history {
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-top: 15px;
+}
+
+.no-history {
+  text-align: center;
+  padding: 30px 20px;
+  color: #a0aec0;
+  font-style: italic;
+}
