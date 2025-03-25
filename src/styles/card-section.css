@@ -13,3 +13,45 @@
   align-items: center;
   margin: 30px 0;
 }
+
+.team-selection-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.team-dropdown {
+  appearance: none;
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border: 2px solid #a29bfe;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6c5ce7;
+  cursor: pointer;
+  transition: all 0.3s;
+  outline: none;
+  position: relative;
+}
+
+.team-dropdown:focus {
+  box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+}
+
+.team-dropdown option {
+  background: white;
+  color: #333;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .team-selection-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .team-dropdown {
+    width: 100%;
+  }
+}
