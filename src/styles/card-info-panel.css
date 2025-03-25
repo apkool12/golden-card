@@ -44,3 +44,57 @@
   transform: translateY(-3px);
   box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
 }
+
+.csv-upload {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.csv-upload-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.csv-upload-button:hover {
+  background-color: #45a049;
+}
+
+.loaded-cards-count {
+  color: #666;
+  font-size: 0.9em;
+}
+
+.load-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.load-modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.load-modal h2 {
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.load-modal p {
+  color: #666;
+}

@@ -8,12 +8,31 @@ import InfoBox from './components/infoBox';
 import { createGoldenCards, createCardRarities } from './data/cardData';
 
 function App() {
+  // Initialize state with local storage or default values
   const [goldenCards] = useState(() => createGoldenCards());
   const [rarities] = useState(() => createCardRarities());
   const [currentCard, setCurrentCard] = useState(null);
   const [isOpening, setIsOpening] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
-  const [historyCards, setHistoryCards] = useState([]);
+  const [isTeamModalOpen, setIsTeamModalOpen] = useState(false);
+  const [selectedTeam, setSelectedTeam] = useState(null);
+  const [coins, setCoins] = useState(() => {
+    const savedCoins = localStorage.getItem('gameCoins');
+    return savedCoins ? parseInt(savedCoins, 10) : 10;
+  });
+  const [historyCards, setHistoryCards] = useState(() => {
+    const savedHistory = localStorage.getItem('cardHistory');
+    return savedHistory ? JSON.parse(savedHistory) : [];
+  });
+  
+  // Persist coins and history to local storage
+  useEffect(() => {
+    localStorage.setItem('gameCoins', coins.toString());
+  }, [coins]);
+
+  useEffect(() => {
+    localStorage.setItem('cardHistory', JSON.stringify(historyCards));
+  }, [historyCards]);
   
   const drawRandomCard = () => {
     const random = Math.random();
@@ -50,11 +69,21 @@ function App() {
     return {
       ...selectedCard,
       rarity: selectedRarity,
-      id: Date.now()
+      id: Date.now(),
+      team: selectedTeam
     };
   };
   
   const openCard = () => {
+    setIsTeamModalOpen(true);
+  };
+  
+  const handleTeamSelection = (team) => {
+    setSelectedTeam(team);
+    setIsTeamModalOpen(false);
+
+    setCoins(prev => prev - 3);
+    
     setIsOpening(true);
     setIsRevealed(false);
     
@@ -83,6 +112,31 @@ function App() {
   const handleCardEffect = (card) => {
     if (!card) return;
   };
+
+  // Team selection modal
+  const renderTeamModal = () => {
+    if (!isTeamModalOpen) return null;
+    
+    const teams = Array.from({ length: 12 }, (_, i) => `${i + 1}조`);
+    
+    return (
+      <div className="team-modal-overlay">
+        <div className="team-modal">
+          <h2>팀 선택</h2>
+          <select 
+            value={selectedTeam || ''} 
+            onChange={(e) => handleTeamSelection(e.target.value)}
+          >
+            <option value="">팀을 선택하세요</option>
+            {teams.map(team => (
+              <option key={team} value={team}>{team}</option>
+            ))}
+          </select>
+          <button onClick={() => setIsTeamModalOpen(false)}>취소</button>
+        </div>
+      </div>
+    );
+  };
   
   return (
     <div className="app-container">
@@ -97,12 +151,15 @@ function App() {
         isRevealed={isRevealed}
         reopenCard={reopenCard}
         openCard={openCard}
+        coins={coins}
         rarities={rarities}
         handleCardEffect={handleCardEffect}
       />
       <HistorySection historyCards={historyCards} />
       
       <InfoBox />
+      
+      {renderTeamModal()}
     </div>
   );
 }

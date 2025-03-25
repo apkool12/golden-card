@@ -10,7 +10,7 @@ export const createGoldenCards = () => {
     { type: "힌트", content: "3번의 비밀번호는 홀수로 끝납니다.", effect: "힌트 획득" },
     { type: "힌트", content: "2번 상자의 비밀번호에는 7이 포함되어 있습니다.", effect: "힌트 획득" },
     { type: "힌트", content: "어딘가에는 7성구가 있습니다.", effect: "힌트 획득" },
-    { type: "힌트", content: "6번 상자의 비밀번호는 2024와 관련있습니다.", effect: "힌트 획득" },
+    { type: "힌트", content: "6번 상자의 비밀번호는 2025와 관련있습니다.", effect: "힌트 획득" },
     
     // 이벤트 및 특별 카드 (SR)
     { type: "event", content: "복면가왕 참가 시 추가 코인 3개 지급", effect: "이벤트 보너스" },
@@ -22,6 +22,7 @@ export const createGoldenCards = () => {
     { type: "special", content: "다른 팀에게 코인 4개 뺏기 가능", effect: "특수 효과" },
     
     // 보상 및 벌칙 카드 (R)
+
     { type: "보상", content: "1코인 지급", effect: "코인 +1" },
     { type: "보상", content: "2코인 지급", effect: "코인 +2" },
     { type: "보상", content: "3코인 지급", effect: "코인 +3" },
@@ -35,9 +36,9 @@ export const createGoldenCards = () => {
 
 export const createCardRarities = () => {
   return {
-    UR: { name: "UR", prob: 0.002, color: "gold" },
-    SSR: { name: "SSR", prob: 0.095, color: "#ff1493" },
-    SR: { name: "SR", prob: 0.1, color: "#1e90ff" },
-    R: { name: "R", prob: 0.803, color: "#a9a9a9" }
+    UR: { name: "UR", prob: 0.001, color: "gold" },
+    SSR: { name: "SSR", prob: 0.015, color: "#ff1493" },
+    SR: { name: "SR", prob: 0.084, color: "#1e90ff" },
+    R: { name: "R", prob: 0.9, color: "#a9a9a9" }
   };
 };
