@@ -17,10 +17,8 @@ const CardSection = ({
   rarities,
   handleCardEffect
 }) => {
-  // 카드가 완전히 공개되었을 때 효과 적용
   useEffect(() => {
     if (currentCard && isRevealed && !isOpening) {
-      // 카드 효과 적용
       handleCardEffect(currentCard);
     }
   }, [currentCard, isRevealed, isOpening, handleCardEffect]);

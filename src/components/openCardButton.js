@@ -7,7 +7,7 @@ const OpenCardButton = ({ openCard, coins }) => {
       className={`open-card-btn`}
       onClick={openCard}
     >
-      {"황금 카드 열기 (3 코인)"}
+      {"황금 카드 열기"}
     </button>
   );
 };

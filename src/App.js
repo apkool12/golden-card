@@ -5,17 +5,22 @@ import CardInfoPanel from './components/cardInfoPanel';
 import CardSection from './components/cardSection';
 import HistorySection from './components/historySection';
 import InfoBox from './components/infoBox';
+import AdminPage from './components/AdminPage';
 import { createGoldenCards, createCardRarities } from './data/cardData';
 
 function App() {
   // Initialize state with local storage or default values
-  const [goldenCards] = useState(() => createGoldenCards());
+  const [goldenCards, setGoldenCards] = useState(() => {
+    const savedCards = localStorage.getItem('availableCards');
+    return savedCards ? JSON.parse(savedCards) : createGoldenCards();
+  });
   const [rarities] = useState(() => createCardRarities());
   const [currentCard, setCurrentCard] = useState(null);
   const [isOpening, setIsOpening] = useState(false);
   const [isRevealed, setIsRevealed] = useState(false);
   const [isTeamModalOpen, setIsTeamModalOpen] = useState(false);
   const [selectedTeam, setSelectedTeam] = useState(null);
+  const [isAdminPage, setIsAdminPage] = useState(false);
   const [coins, setCoins] = useState(() => {
     const savedCoins = localStorage.getItem('gameCoins');
     return savedCoins ? parseInt(savedCoins, 10) : 10;
@@ -25,7 +30,7 @@ function App() {
     return savedHistory ? JSON.parse(savedHistory) : [];
   });
   
-  // Persist coins and history to local storage
+  // Persist coins, history, and available cards to local storage
   useEffect(() => {
     localStorage.setItem('gameCoins', coins.toString());
   }, [coins]);
@@ -33,6 +38,10 @@ function App() {
   useEffect(() => {
     localStorage.setItem('cardHistory', JSON.stringify(historyCards));
   }, [historyCards]);
+
+  useEffect(() => {
+    localStorage.setItem('availableCards', JSON.stringify(goldenCards));
+  }, [goldenCards]);
   
   const drawRandomCard = () => {
     const random = Math.random();
@@ -47,29 +56,31 @@ function App() {
       }
     }
     
-    let filteredCards = [...goldenCards];
-    
-    if (selectedRarity === "UR") {
-      filteredCards = filteredCards.filter(card => card.type === "양주");
-    } else if (selectedRarity === "SSR") {
-      filteredCards = filteredCards.filter(card => card.type === "힌트");
-    } else if (selectedRarity === "SR") {
-      filteredCards = filteredCards.filter(card => card.type === "event" || card.type === "special");
-    } else if (selectedRarity === "R") {
-      filteredCards = filteredCards.filter(card => card.type === "보상" || card.type === "벌칙");
-    }
+    let filteredCards = goldenCards.filter(card => {
+      // Filter by rarity type
+      if (selectedRarity === "UR" && card.type !== "양주") return false;
+      if (selectedRarity === "SSR" && card.type !== "힌트") return false;
+      if (selectedRarity === "SR" && !["event", "special"].includes(card.type)) return false;
+      if (selectedRarity === "R" && !["보상", "벌칙"].includes(card.type)) return false;
+      
+      return true;
+    });
     
     if (filteredCards.length === 0) {
-      filteredCards = [...goldenCards];
+      // If no cards left, reset the deck for this rarity type
+      filteredCards = goldenCards;
     }
     
     const randomCardIndex = Math.floor(Math.random() * filteredCards.length);
     const selectedCard = filteredCards[randomCardIndex];
     
+    // Remove the selected card from available cards
+    setGoldenCards(prevCards => prevCards.filter(card => card.id !== selectedCard.id));
+    
     return {
       ...selectedCard,
       rarity: selectedRarity,
-      id: Date.now(),
+      drawnAt: Date.now(),
       team: selectedTeam
     };
   };
@@ -79,6 +90,11 @@ function App() {
   };
   
   const handleTeamSelection = (team) => {
+    if (goldenCards.length === 0) {
+      alert('모든 카드를 소진했습니다. 관리자 페이지에서 카드를 초기화하세요.');
+      return;
+    }
+
     setSelectedTeam(team);
     setIsTeamModalOpen(false);
 
@@ -113,6 +129,24 @@ function App() {
     if (!card) return;
   };
 
+  // Reset all cards and game data
+  const resetCardData = () => {
+    const initialCards = createGoldenCards();
+    setGoldenCards(initialCards);
+    setHistoryCards([]);
+    setCoins(10);
+    setCurrentCard(null);
+    localStorage.removeItem('availableCards');
+    localStorage.removeItem('cardHistory');
+    localStorage.removeItem('gameCoins');
+    alert('모든 데이터가 초기화되었습니다.');
+  };
+
+  // Toggle admin page
+  const toggleAdminPage = () => {
+    setIsAdminPage(!isAdminPage);
+  };
+
   // Team selection modal
   const renderTeamModal = () => {
     if (!isTeamModalOpen) return null;
@@ -140,26 +174,39 @@ function App() {
   
   return (
     <div className="app-container">
-      <Header/>
-      
-      <CardInfoPanel rarities={rarities} />
-      
-      <CardSection 
-        currentCard={currentCard}
-        setCurrentCard={setCurrentCard}
-        isOpening={isOpening}
-        isRevealed={isRevealed}
-        reopenCard={reopenCard}
-        openCard={openCard}
-        coins={coins}
-        rarities={rarities}
-        handleCardEffect={handleCardEffect}
-      />
-      <HistorySection historyCards={historyCards} />
-      
-      <InfoBox />
-      
-      {renderTeamModal()}
+      {!isAdminPage ? (
+        <>
+          <Header toggleAdminPage={toggleAdminPage} />
+          
+          <CardInfoPanel 
+            rarities={rarities} 
+            availableCardsCount={goldenCards.length} 
+          />
+          
+          <CardSection 
+            currentCard={currentCard}
+            setCurrentCard={setCurrentCard}
+            isOpening={isOpening}
+            isRevealed={isRevealed}
+            reopenCard={reopenCard}
+            openCard={openCard}
+            coins={coins}
+            rarities={rarities}
+            handleCardEffect={handleCardEffect}
+          />
+          <HistorySection historyCards={historyCards} />
+          
+          <InfoBox />
+          
+          {renderTeamModal()}
+        </>
+      ) : (
+        <AdminPage 
+          resetCardData={resetCardData} 
+          toggleAdminPage={toggleAdminPage}
+          availableCards={goldenCards}
+        />
+      )}
     </div>
   );
 }
