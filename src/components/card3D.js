@@ -18,7 +18,7 @@ const Card3D = ({ card, isOpening, isRevealed, rarities }) => {
             <div className="card-rarity">{rarities[card.rarity].name}</div>
             <div className="card-type">{card.type.toUpperCase()}</div>
             <div className="card-text">{card.content}</div>
-            <div className="card-effect">{card.effect}</div>
+            <div className="card-effect">( *˘╰╯˘*)</div>
           </div>
         </div>
       </div>

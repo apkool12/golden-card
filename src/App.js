@@ -58,18 +58,18 @@ function App() {
         case "UR":
           return card.type === "양주";
         case "SSR":
-          return card.type === "힌트";
+          return card.type === "비밀번호 공개";
         case "SR":
-          return ["event", "special"].includes(card.type);
+          return card.type === "비밀번호 공개";
         case "R":
-          return ["보상", "벌칙"].includes(card.type);
+          return ["보상", "벌칙", "도전"].includes(card.type);
         default:
           return true;
       }
     });
 
     if (filteredCards.length === 0) {
-      return drawRandomCard(); // 재귀 호출로 다시 뽑기
+      return drawRandomCard();
     }
 
     const randomCardIndex = Math.floor(Math.random() * filteredCards.length);

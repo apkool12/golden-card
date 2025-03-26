@@ -15,7 +15,7 @@ const AdminPage = ({ resetCardData, toggleAdminPage, availableCards }) => {
           <div className="card-stats">
             <p>현재 남은 카드 수: {availableCards.length}</p>
             <div className="card-type-breakdown">
-              {['양주', '힌트', 'event', 'special', '보상', '벌칙'].map(type => (
+              {['양주', '비밀번호 공개', '열쇠 힌트', '보상', '벌칙', '도전'].map(type => (
                 <p key={type}>
                   {type}: {availableCards.filter(card => card.type === type).length}
                 </p>
