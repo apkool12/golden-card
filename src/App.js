@@ -114,7 +114,7 @@ function GameProvider({ children }) {
         setIsRevealed(true);
         setIsOpening(false);
 
-        setHistoryCards((prev) => [drawnCard, ...prev].slice(0, 10));
+        setHistoryCards((prev) => [drawnCard, ...prev]);
       }, 1500);
     }, 1000);
   };
