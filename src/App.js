@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext, useContext } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import Header from "./components/header";
 import CardInfoPanel from "./components/cardInfoPanel";
@@ -8,7 +9,9 @@ import InfoBox from "./components/infoBox";
 import AdminPage from "./components/AdminPage";
 import { createGoldenCards, createCardRarities } from "./data/cardData";
 
-function App() {
+const GameContext = createContext();
+
+function GameProvider({ children }) {
   const [goldenCards, setGoldenCards] = useState(() => {
     const savedCards = localStorage.getItem("availableCards");
     return savedCards ? JSON.parse(savedCards) : createGoldenCards();
@@ -133,44 +136,131 @@ function App() {
   };
 
   const toggleAdminPage = () => {
-    setIsAdminPage(!isAdminPage);
+    setIsAdminPage(prev => !prev);
+  };
+
+  const contextValue = {
+    goldenCards,
+    setGoldenCards,
+    rarities,
+    currentCard,
+    setCurrentCard,
+    isOpening,
+    setIsOpening,
+    isRevealed,
+    setIsRevealed,
+    selectedTeam,
+    setSelectedTeam,
+    isAdminPage,
+    setIsAdminPage,
+    coins,
+    setCoins,
+    historyCards,
+    setHistoryCards,
+    openCard,
+    handleCardEffect,
+    resetCardData,
+    toggleAdminPage
   };
 
   return (
-    <div className="app-container">
-      {!isAdminPage ? (
-        <>
-          <Header toggleAdminPage={toggleAdminPage} />
+    <GameContext.Provider value={contextValue}>
+      {children}
+    </GameContext.Provider>
+  );
+}
 
-          <CardInfoPanel
-            rarities={rarities}
-            availableCardsCount={goldenCards.length}
-          />
+function MainPage() {
+  const { 
+    goldenCards, 
+    rarities, 
+    currentCard, 
+    setCurrentCard, 
+    isOpening, 
+    isRevealed, 
+    openCard, 
+    coins, 
+    handleCardEffect, 
+    selectedTeam, 
+    setSelectedTeam,
+    toggleAdminPage,
+    historyCards
+  } = useContext(GameContext);
 
-          <CardSection
-            currentCard={currentCard}
-            setCurrentCard={setCurrentCard}
-            isOpening={isOpening}
-            isRevealed={isRevealed}
-            openCard={openCard}
-            coins={coins}
-            rarities={rarities}
-            handleCardEffect={handleCardEffect}
-            selectedTeam={selectedTeam}
-            setSelectedTeam={setSelectedTeam}
-          />
-          <HistorySection historyCards={historyCards} />
+  return (
+    <>
+      <Header toggleAdminPage={toggleAdminPage} />
 
-          <InfoBox />
-        </>
-      ) : (
-        <AdminPage
-          resetCardData={resetCardData}
-          toggleAdminPage={toggleAdminPage}
-          availableCards={goldenCards}
-        />
-      )}
+      <CardInfoPanel
+        rarities={rarities}
+        availableCardsCount={goldenCards.length}
+      />
+
+      <CardSection
+        currentCard={currentCard}
+        setCurrentCard={setCurrentCard}
+        isOpening={isOpening}
+        isRevealed={isRevealed}
+        openCard={openCard}
+        coins={coins}
+        rarities={rarities}
+        handleCardEffect={handleCardEffect}
+        selectedTeam={selectedTeam}
+        setSelectedTeam={setSelectedTeam}
+      />
+      
+      <Link to="/history" className="view-history-link">전체 카드 내역 보기</Link>
+
+      <InfoBox />
+    </>
+  );
+}
+
+function FullHistoryPage() {
+  const { historyCards } = useContext(GameContext);
+
+  return (
+    <div className="full-history-page">
+      <Link to="/" className="back-to-main-link">메인으로 돌아가기</Link>
+      <h2>전체 카드 내역</h2>
+      <HistorySection historyCards={historyCards} />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <GameProvider>
+      <AppContent />
+    </GameProvider>
+  );
+}
+
+function AppContent() {
+  const { 
+    isAdminPage, 
+    toggleAdminPage, 
+    goldenCards, 
+    resetCardData 
+  } = useContext(GameContext);
+
+  return (
+    <Router>
+      <div className="app-container">
+        {isAdminPage ? (
+          <AdminPage
+            resetCardData={resetCardData}
+            toggleAdminPage={toggleAdminPage}
+            availableCards={goldenCards}
+          />
+        ) : (
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="/history" element={<FullHistoryPage />} />
+          </Routes>
+        )}
+      </div>
+    </Router>
   );
 }
 

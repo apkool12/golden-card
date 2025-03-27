@@ -60,3 +60,31 @@ body {
   margin-top: 10px;
   padding: 5px 10px;
 }
+
+.view-history-link, 
+.back-to-main-link {
+  display: inline-block;
+  margin: 15px;
+  padding: 10px 15px;
+  background-color: #4a4a4a;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.view-history-link:hover, 
+.back-to-main-link:hover {
+  background-color: #666;
+}
+
+.full-history-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.full-history-page h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
