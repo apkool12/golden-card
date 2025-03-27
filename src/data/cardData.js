@@ -2,7 +2,7 @@ export const createGoldenCards = () => {
   const goldenCards = [
 
     // 양주 획득 (UR)
-    { id: 'ur-1', type: '양주', content: '축하드립니다 !', effect: '양주' },
+    { id: 'ur-1', type: '상자 열기', content: '원하는 상자를 선택해주세요 !', effect: '양주' },
 
     // 비밀번호 다수 공개 (SSR)
     { id: 'legendary-1', type: '비밀번호 공개', content: '1번 상자의 비밀번호는 16__? 이다.', effect: '16__' },
