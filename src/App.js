@@ -60,7 +60,7 @@ function App() {
         case "SSR":
           return card.type === "비밀번호 공개";
         case "SR":
-          return card.type === "비밀번호 공개";
+          return card.type === "열쇠 힌트";
         case "R":
           return ["보상", "벌칙", "도전"].includes(card.type);
         default:
