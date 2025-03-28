@@ -5,8 +5,8 @@ export const createGoldenCards = () => {
     { id: 'ur-1', type: '상자 열기', content: '원하는 상자를 선택해주세요 !', effect: '양주' },
 
     // 비밀번호 다수 공개 (SSR)
-    { id: 'legendary-1', type: '비밀번호 공개', content: '1번 상자의 비밀번호는 16__? 이다.', effect: '16__' },
-    { id: 'legendary-2', type: '비밀번호 공개', content: '2번 상자의 비밀번호는 92__? 이다.', effect: '92__' },
+    { id: 'legendary-1', type: '비밀번호 공개', content: '1번 상자의 비밀번호는 nn__? 이다.', effect: '16__' },
+    { id: 'legendary-2', type: '비밀번호 공개', content: '2번 상자의 비밀번호는 nn__? 이다.', effect: '92__' },
     { id: 'legendary-3', type: '비밀번호 공개', content: '원하는 상자의 비밀번호 앞에 두 자리 획득', effect: 'nn__' },
     { id: 'legendary-4', type: '비밀번호 공개', content: '랜덤한 두 개의 상자 비밀번호 한 자리 공개', effect: 'n___, n___' },
     { id: 'legendary-5', type: '비밀번호 공개', content: '5번 상자의 비밀번호를 공개하지만, 한 자리만 숨겨진 상태', effect: '737_' },
@@ -109,9 +109,9 @@ export const createGoldenCards = () => {
     { id: 'reward-38', type: '보상', content: '오징어게임 한번 하고 서명 받아오면 10코인 지급', effect: '코인 +10' },
     { id: 'reward-39', type: '보상', content: '오징어게임 한번 하고 서명 받아오면 10코인 지급', effect: '코인 +10' },
 
-    { id: 'reward-40', type: '보상', content: '스태프를 이겨라 하고 인증하면 5코인 획득', effect: '코인 +5' },
-    { id: 'reward-41', type: '보상', content: '스태프를 이겨라 하고 인증하면 5코인 획득', effect: '코인 +5' },
-    { id: 'reward-42', type: '보상', content: '스태프를 이겨라 하고 인증하면 5코인 획득', effect: '코인 +5' },
+    { id: 'reward-40', type: '보상', content: '상대팀을 이겨라 하고 인증하면 5코인 획득', effect: '코인 +5' },
+    { id: 'reward-41', type: '보상', content: '상대팀을 이겨라 하고 인증하면 5코인 획득', effect: '코인 +5' },
+    { id: 'reward-42', type: '보상', content: '상대팀을 이겨라 하고 인증하면 5코인 획득', effect: '코인 +5' },
 
     { id: 'reward-43', type: '보상', content: '원하는 조한테 3코인 뺏어오기', effect: '코인 +3' },
     { id: 'reward-44', type: '보상', content: '원하는 조한테 3코인 뺏어오기', effect: '코인 +3' },
